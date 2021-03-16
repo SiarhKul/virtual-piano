@@ -3,7 +3,7 @@ const btnLetters = document.querySelector('.btn-letters')
 const btnNotes = document.querySelector('.btn-notes')
 const pianoKey = document.querySelectorAll('.piano-key')
 
-//------------------------------------------------mouse
+//------------------------------------------------MOUSE
 piano.addEventListener('mousedown', (e) => {
   playMusic(e)
   pianoKey.forEach(key => key.addEventListener('mouseover', playMusic))
@@ -15,7 +15,7 @@ piano.addEventListener('mouseup', (e) => {
   removeActiveKey(e)
 })
 
-//------------------------------------------------keyboard
+//------------------------------------------------KEYBOARD
 window.addEventListener("keydown", (e) => {
   const key = document.querySelector(`.piano-key[data-letter="${e.key.toUpperCase()}"]`);
   if (key === null) return;
@@ -24,7 +24,7 @@ window.addEventListener("keydown", (e) => {
   audio.play();
 });
 
-//------------------------------------------------button change letters
+//------------------------------------------------CHANGE LETTER
 
 btnLetters.addEventListener('click', () => {
   btnNotes.classList.remove('btn-active')
@@ -37,7 +37,7 @@ btnNotes.addEventListener('click', () => {
   btnNotes.classList.add('btn-active')
   pianoKey.forEach(k => k.classList.remove('letter'))
 })
-//------------------------------------------------fullscreen
+//------------------------------------------------FULLSCREEN
 
 document.querySelector('.fullscreen').addEventListener('click', () => {
   if (!document.fullscreenElement) {
