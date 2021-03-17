@@ -2,6 +2,7 @@ const piano = document.querySelector('.piano')
 const btnLetters = document.querySelector('.btn-letters')
 const btnNotes = document.querySelector('.btn-notes')
 const pianoKey = document.querySelectorAll('.piano-key')
+var down = false;
 
 //------------------------------------------------MOUSE
 piano.addEventListener('mousedown', (e) => {
@@ -17,11 +18,14 @@ piano.addEventListener('mouseup', (e) => {
 
 //------------------------------------------------KEYBOARD
 window.addEventListener("keydown", (e) => {
-  const key = document.querySelector(`.piano-key[data-letter="${e.key.toUpperCase()}"]`);
-  if (key === null) return;
-  const audio = document.querySelector(`audio[data-note="${key.dataset.note}"]`);
-  audio.currentTime = 0;
-  audio.play();
+  if (!e.repeat) {
+    const key = document.querySelector(`.piano-key[data-letter="${e.key.toUpperCase()}"]`);
+    if (key === null) return;
+    const audio = document.querySelector(`audio[data-note="${key.dataset.note}"]`);
+    audio.currentTime = 0;
+    audio.play();
+  }
+  return;
 });
 
 //------------------------------------------------CHANGE LETTER
