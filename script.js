@@ -6,16 +6,18 @@ var down = false;
 
 //------------------------------------------------MOUSE
 piano.addEventListener('mousedown', (e) => {
-  console.dir(e.target);
-  console.log(e.target);
   playMusic(e)
   pianoKey.forEach(key => key.addEventListener('mouseover', playMusic))
   pianoKey.forEach(key => key.addEventListener('mouseout', removeActiveKey))
 })
 
 piano.addEventListener('mouseup', (e) => {
+  console.log(e);
   pianoKey.forEach(key => key.removeEventListener('mouseover', playMusic))
   removeActiveKey(e)
+})
+document.querySelector('main').addEventListener('mouseup', (e) => {
+  pianoKey.forEach(key => key.removeEventListener('mouseover', playMusic))
 })
 
 //------------------------------------------------KEYBOARD
@@ -65,15 +67,15 @@ document.querySelector('.fullscreen').addEventListener('click', () => {
 
 const playMusic = (e) => {
   const audio = document.querySelector(`audio[data-note="${e.target.dataset.note}"]`);
+  e.target.classList.add('colorful')
   e.target.classList.add('piano-key-active')
-  // e.target.style.
-  // var content = window.getComputedStyle(e.target, ':before');
-  // console.log(content);
   audio.currentTime = 0;
   audio.play();
 }
 const removeActiveKey = (e) => {
+  console.log(e.target);
   e.target.classList.remove('piano-key-active')
+  e.target.classList.remove('colorful')
 }
 const turnOffFullscreen = () => {
   document.addEventListener("keypress", function (e) {
