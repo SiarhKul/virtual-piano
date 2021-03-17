@@ -6,6 +6,8 @@ var down = false;
 
 //------------------------------------------------MOUSE
 piano.addEventListener('mousedown', (e) => {
+  console.dir(e.target);
+  console.log(e.target);
   playMusic(e)
   pianoKey.forEach(key => key.addEventListener('mouseover', playMusic))
   pianoKey.forEach(key => key.addEventListener('mouseout', removeActiveKey))
@@ -18,14 +20,21 @@ piano.addEventListener('mouseup', (e) => {
 
 //------------------------------------------------KEYBOARD
 window.addEventListener("keydown", (e) => {
+
   if (!e.repeat) {
     const key = document.querySelector(`.piano-key[data-letter="${e.key.toUpperCase()}"]`);
+    key.classList.add('piano-key-active')
     if (key === null) return;
     const audio = document.querySelector(`audio[data-note="${key.dataset.note}"]`);
     audio.currentTime = 0;
     audio.play();
   }
   return;
+  ;
+});
+window.addEventListener("keyup", (e) => {
+  const key = document.querySelector(`.piano-key[data-letter="${e.key.toUpperCase()}"]`);
+  key.classList.remove('piano-key-active')
 });
 
 //------------------------------------------------CHANGE LETTER
@@ -57,6 +66,9 @@ document.querySelector('.fullscreen').addEventListener('click', () => {
 const playMusic = (e) => {
   const audio = document.querySelector(`audio[data-note="${e.target.dataset.note}"]`);
   e.target.classList.add('piano-key-active')
+  // e.target.style.
+  // var content = window.getComputedStyle(e.target, ':before');
+  // console.log(content);
   audio.currentTime = 0;
   audio.play();
 }
